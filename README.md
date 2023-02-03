@@ -1,7 +1,7 @@
 # Notivate
 
 Notivate is a platform for peer learning among students.
-It encourages students to consolidate their understanding into notes, from which others that learn, review, and give feedback.
+It encourages students to consolidate their understanding into notes, from which others can learn, review, and give feedback.
 With Notivate, you have access to a global community of passionate learners ready to learn and share their knowledge.
 
 ## New to Flutter?
