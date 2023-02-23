@@ -10,11 +10,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Notivate',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const HomeScreen(title: 'Flutter Demo Home Page'),
+      home: const HomeScreen(title: 'Feed'),
+      debugShowCheckedModeBanner: true,
     );
   }
 }
@@ -29,13 +30,23 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+  final List<Note> notes = List.of(const [
+    Note(
+      id: "1",
+      title: "Hello World",
+      subtitle: "lorem ipsum dolor sit amet",
+    ),
+    Note(
+      id: "2",
+      title: "Data Structures: LinkedList",
+      subtitle: "LinkedList is one of the more common data structures...",
+    ),
+    Note(
+      id: "3",
+      title: "Favor Composition over Inheritance",
+      subtitle: "OOP Design Principles - Part 007",
+    ),
+  ]);
 
   @override
   Widget build(BuildContext context) {
@@ -43,25 +54,39 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
+      body: SafeArea(
+        child: ListView.builder(
+          itemCount: notes.length,
+          itemBuilder: (context, index) {
+            final note = notes[index];
+
+            return Card(
+              key: ValueKey(note.id),
+              child: ListTile(
+                title: Text(note.title),
+                subtitle: Text(note.subtitle),
+              ),
+            );
+          },
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
+        onPressed: () {},
+        tooltip: 'Write',
+        child: const Icon(Icons.edit_outlined),
       ),
     );
   }
+}
+
+class Note {
+  final String id;
+  final String title;
+  final String subtitle;
+
+  const Note({
+    required this.id,
+    required this.title,
+    required this.subtitle,
+  });
 }
